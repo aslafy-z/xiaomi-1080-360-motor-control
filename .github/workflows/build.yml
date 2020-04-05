@@ -1,0 +1,58 @@
+name: build
+
+on:
+  push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        release: [ 'debug', 'release' ]
+        rust-toolchain: [ 'stable' ]
+        include:
+          - release: debug
+            binary-name: control-debug
+            rust-target: x86_64-unknown-linux-gnu
+            dependencies: >-
+              gcc
+
+          - release: release
+            binary-name: control
+            rust-target: armv7-unknown-linux-gnueabihf
+            dependencies: >-
+              gcc-multilib-arm-linux-gnueabihf
+              libc-dev-armhf-cross
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential ${{ matrix.dependencies }} 
+
+      - name: Setup rust '${{ matrix.rust-toolchain }}/${{ matrix.rust-target }}' environment
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust-toolchain }}
+          target: ${{ matrix.rust-target }}
+          components: rustfmt
+
+      - name: Cache rust dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ matrix.release }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-registry-${{ matrix.release }}-
+
+      - run: make ${{ matrix.release }}
+
+      - name: Upload binary artefact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.binary-name }}
+          path: ${{ matrix.binary-name }}

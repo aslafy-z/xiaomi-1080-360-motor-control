@@ -1,0 +1,15 @@
+[package]
+name = "control"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+dlopen = "0.1"
+dlopen_derive = "0.1"
+clap = "2.33.0"
+strum = "0.17.1"
+strum_macros = "0.17.1"
+rouille = "3.0.0"
+serde = { version = "1.0", features = ["derive"] }
+pickledb = "0.4.1"
+path-clean = "0.1.0"
