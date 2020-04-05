@@ -86,12 +86,10 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: control
-          path: control
       - name: Get debug artifact
         uses: actions/download-artifact@v1
         with:
           name: control-debug
-          path: control-debug
 
       - name: Upload release artifact
         uses: actions/upload-release-asset@v1
@@ -99,7 +97,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: control
+          asset_path: ./control
           asset_name: control-${{ steps.get_version.outputs.VERSION }}-release-armv7
           asset_content_type: application/octet-stream
       - name: Upload debug artifact
@@ -108,6 +106,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: control-debug
+          asset_path: ./control-debug
           asset_name: control-${{ steps.get_version.outputs.VERSION }}-debug-amd64
           asset_content_type: application/octet-stream
