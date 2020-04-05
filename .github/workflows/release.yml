@@ -42,7 +42,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: control
-          asset_name: control
+          asset_name: control-${{ github.ref }}-release-armv7
           asset_content_type: application/octet-stream
       - name: Upload debug artifact
         uses: actions/upload-release-asset@v1
@@ -51,5 +51,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: control-debug
-          asset_name: control-debug
+          asset_name: control-${{ github.ref }}-debug-amd64
           asset_content_type: application/octet-stream
