@@ -57,7 +57,7 @@ jobs:
           name: ${{ matrix.binary-name }}
           path: ${{ matrix.binary-name }}
 
-  create-release:
+  release:
     runs-on: ubuntu-latest
     needs: build
     if: "contains(github.ref, 'refs/tags/')"
