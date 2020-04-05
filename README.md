@@ -63,3 +63,11 @@ curl http://0.0.0.0:8888/ptz/move/pan/forward/10
 curl http://0.0.0.0:8888/ptz/goto/1/10
 curl http://0.0.0.0:8888/ptz/goto/1/10
 ```
+
+## Contributors
+
+Big thanks to all the involved people:
+
+- [@telmomarques](https://github.com/telmomarques)
+- [@thewh1teagle](https://github.com/thewh1teagle)
+- [@CSchlipp](https://github.com/thewh1teagle)
