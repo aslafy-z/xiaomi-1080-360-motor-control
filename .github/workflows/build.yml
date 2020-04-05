@@ -51,7 +51,7 @@ jobs:
 
       - run: make ${{ matrix.release }}
 
-      - name: Upload binary artefact
+      - name: Upload binary artifact
         uses: actions/upload-artifact@v1
         with:
           name: ${{ matrix.binary-name }}
