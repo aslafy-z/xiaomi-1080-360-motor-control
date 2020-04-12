@@ -1,7 +1,7 @@
 NAME = control
 RELEASE_NAME = $(NAME)
-RELEASE_CC = arm-linux-gnueabihf-gcc
-RELEASE_TARGET = armv7-unknown-linux-gnueabihf
+RELEASE_CC = arm-linux-musleabihf-gcc
+RELEASE_TARGET = armv7-unknown-linux-musleabihf
 DEBUG_NAME = $(RELEASE_NAME)-debug
 DEBUG_NAME = $(RELEASE_NAME)-debug
 DEBUG_CC = gcc
